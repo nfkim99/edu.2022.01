@@ -1,0 +1,92 @@
+1. jS - 가위 바위 보 3개의 버튼을 작성후 해당 버튼을 누르면 이미지가 바뀌게 하시오
+
+2. 스프링 시큐티 설정을 위한 pom.xml 과 web.xml 및 가장 기본적인
+security-context.xml 설정은?
+
+
+=================pom.xml===============
+
+<!-- Spring Security -->
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-core</artifactId>
+         <version>${org.security-version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-web</artifactId>
+         <version>${org.security-version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-config</artifactId>
+         <version>${org.security-version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-taglibs</artifactId>
+         <version>${org.security-version}</version>
+      </dependency>
+
+
+=================web.xml==================
+
+
+<!-- Spring Security Filter -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+ 
+    <filter-mapping>
+          <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+=================security-context.xml============
+
+
+	<http>
+		<intercept-url pattern="/security/all"
+			access="permitAll" />
+		<intercept-url pattern="/security/member"
+			access="hasRole('ROLE_MEMBER')" /> <!-- 'ROLE_MEMBER'권한을 가진사람만! -->
+		<form-login />
+	</http>
+
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="member" password="{noop}member"
+					authorities="ROLE_MEMBER" />
+				<user name="mananger" password="{noop}mananger"
+					authorities="ROLE_MEMBER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+
+3. 인증과 권한에 대하여 설명하시오.
+
+	- 웹 서비스에서 보안이라는 주제의 가장 기본이 되는 개념은 
+            인증(Authentication)과 권한부여(Authorization) 입니다. 
+
+	- 개념적으로 인증은 자신이 누구라고 주장하는 사람을 확인하는 절차이고, 
+              권한부여는 가고 싶은 곳으로 가도록 하거나, 혹은 정보를 얻도록 허용하는 과정입니다. 
+              즉 사용자가 로그인을 위해서 ID와 비밀번호를 입력하면 로그인 가능 여부를 결정하는 것이 인증이고,
+	  그 사용자가 특정 페이지(예를 들면 관리 페이지)를 클릭했을 때, 보여줄지 여부를 결정하는 것이 권한부여 입니다.
+ 
+
+
+
+
+
+
+
+
+
