@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+
+
+
+        function Grade(kor, math, eng) {
+            this.kor = Number(kor);
+            this.math = Number(math);
+            this.eng = Number(eng);
+        }
+
+
+        Grade.prototype.getTotal = function() {
+            return this.kor + this.math + this.eng;
+        }
+
+        Grade.prototype.getAverage = function(){
+            return (this.kor + this.math + this.eng)/3.0;
+
+        };
+
+
+            $(document).ready(() => { // 콜백함수
+                $("#sbmBtn").click(() => {
+
+                    var kor = $("#kor").val();
+                    console.log(kor);
+                    var math = $("#math").val();
+                    console.log(math);
+                    var eng = $("#eng").val();
+                    console.log(eng);
+                    
+                    var grade = new Grade(kor, math, eng);
+                    
+                    console.log("총점: " + grade.getTotal());
+                    var wrapObj = $("#wrap");
+                    var sum = $("<div> 총점은" + grade.getTotal() + "</div>");
+                    $("#wrap").empty();
+                    sum.appendTo(wrapObj);
+                });
+
+                $("#sbmBtn").click(() => {
+
+                    var kor = $("#kor").val();
+                    console.log(kor);
+                    var math = $("#math").val();
+                    console.log(math);
+                    var eng = $("#eng").val();
+                    console.log(eng);
+
+                    var grade = new Grade(kor, math, eng);
+                    
+                    console.log("평균: " + grade.getAverage());
+                    var wrapObj = $("#wrap");
+                    var sum = $("<div> 평균은" + grade.getAverage() + "</div>");
+     
+                    sum.appendTo(wrapObj);
+                });
+
+                $("#resBtn").click(() => {
+                    $("#wrap").empty();
+
+                    $("#kor").val('');
+                    $("#eng").val('');
+                    $("#math").val('');
+                });
+            });
+
+
+        </script>
+
+    </head>
+    <body>
+            국어 : <input id="kor" type="text" name="kor"><br>
+            수학 : <input id="math" type="text" name="math"><br>
+            영어 : <input id="eng" type="text" name="eng"><br>
+            <input id="sbmBtn" type="submit" value="총점">
+            <input id="resBtn" type="reset" value="리셋">
+        <div id="wrap"></div>
+
+
+    </body>
+</html>
