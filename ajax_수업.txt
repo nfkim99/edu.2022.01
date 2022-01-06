@@ -1,0 +1,8 @@
+ajax = 비동기 통신= 쓰레드 ( Therd:쓰레드, 채팅 ) (프로그램안에 또다른 프로그램)
+
+ajax = 비동기통신을 위한 jquery객체
+
+restful = jason
+
+요즘엔 ajax + json + restful 이용하여
+게시판을 구현

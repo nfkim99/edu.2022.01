@@ -1,0 +1,11 @@
+실무에서는 스프링 시큐리티를 확장해서 쓴다.
+
+스프링 시큐리티를 커스터마이징을 하여 프린시펄을 확장하여 세션에 올려두어 썻습니다.
+
+
+
+new breanch
+
+develop_security_step_8_customizing
+
+
