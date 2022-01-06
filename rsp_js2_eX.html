@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+
+        function Rps() {
+
+        var strArr=["가위","바위","보"];
+        var computer= parseInt(Math.random()*3+1); 
+        console.log(computer)
+        }
+
+    $(document).ready(function(){ 
+         
+         $('#siss').click(function(){
+             $('#imgRSP').attr("src","img/가위.jpg")
+             var user = 1;
+             console.log(user);
+             $("#computer").attr("src","img/가위.jpg")
+             var siss = $("#siss").val();
+             console.log(siss);
+         });
+
+         $('#rock').click(function(){
+             $('#imgRSP').attr("src","img/바위.jpg")
+             var rock = $("#rock").val();
+             console.log(rock);
+         })
+
+         $('#paper').click(function(){
+             $('#imgRSP').attr("src","img/보.jpg")
+         })
+
+     });
+         
+     </script>
+</head>
+
+<body>
+    
+<!--
+
+
+ <form>
+
+    입력(1.가위 2.바위 3.보) :<input type="text" id=user>
+    <input type="button" value="게임 결과 확인" onclick=rps() >
+    <input type="text" id=result>
+
+    
+-->
+
+            <img id="computer"></div>
+            <img id="imgRSP"><br>
+
+            <input id="siss" type="button" value="바위" onclick="Rps()">
+            <input id="rock" type="button" value="가위" onclick="Rps()">
+            <input id="paper" type="button" value="보" onclick="Rps()">
+            <input id="sbmBtn" type="submit" value="총점">
+            <input id="resBtn" type="reset" value="리셋">
+        <div id="wrap"></div>
+
+
+
+</form>
+
+</body>
+</html>
