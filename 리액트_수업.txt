@@ -1,0 +1,27 @@
+es6 react 수업
+
+
+
+리액트목표
+
+1. 성적표
+2. 가위바위보
+3. 게시판
+
+리액트로 만들줄 알아야함
+외워야함
+
+리액트 동영상참고
+
+
+<script type="text/babel"> // babel 문법을 읽어라 
+
+            function Hello() {
+
+                return <h1>Hello world</h1>
+            }
+
+
+            ReactDOM.render(<Hello/>, document.getElementById("mydiv"));
+
+    </script>

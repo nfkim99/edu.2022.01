@@ -1,0 +1,22 @@
+마이 바티스에서 1:n 처리
+
+유저 - 권한
+
+user - authority
+유저 - 권한
+
+한명의 유저는 2개의 권한을 가진다.
+
+ex) admin --- role_admin, role_user 권한 2개
+
+
+조인을 통해 쿼리 작성
+select * from dept, emp where emp.deptno = dept.deptno;
+
+vo 하나 만들어서 mapper로 연결한다.
+
+
+userVO(1:n 관계)
+
+private List<AuthVO> authList;
+
