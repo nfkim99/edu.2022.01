@@ -1,0 +1,340 @@
+shoesmart 디비 테이블 생성 쿼리
+
+/* 회원 */ 
+CREATE TABLE member (
+	userid VARCHAR2(20) NOT NULL, /* 회원id */
+	password VARCHAR2(20) NOT NULL, /* 패스워드 */
+	name VARCHAR2(20) NOT NULL, /* 이름 */
+	age NUMBER NOT NULL, /* 나이 */
+	job VARCHAR2(20), /* 직업 */
+	grade NUMBER, /* 등급 */
+	mileage NUMBER /* 적립금 */
+);
+
+COMMENT ON TABLE member IS '회원';
+
+COMMENT ON COLUMN member.userid IS '회원id';
+
+COMMENT ON COLUMN member.password IS '패스워드';
+
+COMMENT ON COLUMN member.name IS '이름';
+
+COMMENT ON COLUMN member.age IS '나이';
+
+COMMENT ON COLUMN member.job IS '직업';
+
+COMMENT ON COLUMN member.grade IS '등급';
+
+COMMENT ON COLUMN member.mileage IS '적립금';
+
+ALTER TABLE member
+	ADD
+		CONSTRAINT PK_member
+		PRIMARY KEY (
+			userid
+		);
+
+/* 게시판 */
+CREATE TABLE board (
+	bid NUMBER NOT NULL, /* 글번호 */
+	btitle VARCHAR2(200) NOT NULL, /* 글제목 */
+	bcontent VARCHAR2(1800), /* 글내용 */
+	bdate DATE NOT NULL, /* 작성일자 */
+	userid VARCHAR2(20), /* 회원id */
+	typeid NUMBER, /* 게시판타입 */
+	bhit NUMBER /* 조회수 */
+);
+
+COMMENT ON TABLE board IS '게시판';
+
+COMMENT ON COLUMN board.bid IS '글번호';
+
+COMMENT ON COLUMN board.btitle IS '글제목';
+
+COMMENT ON COLUMN board.bcontent IS '글내용';
+
+COMMENT ON COLUMN board.bdate IS '작성일자';
+
+COMMENT ON COLUMN board.userid IS '회원id';
+
+COMMENT ON COLUMN board.typeid IS '게시판타입';
+
+COMMENT ON COLUMN board.bhit IS '조회수';
+
+ALTER TABLE board
+	ADD
+		CONSTRAINT PK_board
+		PRIMARY KEY (
+			bid
+		);
+
+/* 권한 */
+CREATE TABLE authorities (
+	authority VARCHAR2(50), /* 권한 */
+	userid VARCHAR2(20) /* 회원id */
+);
+
+COMMENT ON TABLE authorities IS '권한';
+
+COMMENT ON COLUMN authorities.authority IS '권한';
+
+COMMENT ON COLUMN authorities.userid IS '회원id';
+
+/* 게시판타입 */
+CREATE TABLE boardtype (
+	typeid NUMBER NOT NULL /* 게시판타입 */
+);
+
+COMMENT ON TABLE boardtype IS '게시판타입';
+
+COMMENT ON COLUMN boardtype.typeid IS '게시판타입';
+
+ALTER TABLE boardtype
+	ADD
+		CONSTRAINT PK_boardtype
+		PRIMARY KEY (
+			typeid
+		);
+
+/* 댓글 */
+CREATE TABLE reply (
+	breplyid NUMBER NOT NULL, /* 댓글번호 */
+	bgroup NUMBER, /* 원본글그룹 */
+	bstep NUMBER, /* 가로 */
+	bindent NUMBER, /* 세로 */
+	brepdate DATE, /* 댓글날짜 */
+	bid NUMBER /* 글번호 */
+);
+
+COMMENT ON TABLE reply IS '댓글';
+
+COMMENT ON COLUMN reply.breplyid IS '댓글번호';
+
+COMMENT ON COLUMN reply.bgroup IS '원본글그룹';
+
+COMMENT ON COLUMN reply.bstep IS '가로';
+
+COMMENT ON COLUMN reply.bindent IS '세로';
+
+COMMENT ON COLUMN reply.brepdate IS '댓글날짜';
+
+COMMENT ON COLUMN reply.bid IS '글번호';
+
+ALTER TABLE reply
+	ADD
+		CONSTRAINT PK_reply
+		PRIMARY KEY (
+			breplyid
+		);
+
+/* 주문 */
+CREATE TABLE orders (
+	orderid NUMBER NOT NULL, /* 주문번호 */
+	orderdate DATE NOT NULL, /* 주문일자 */
+	userid VARCHAR2(20) /* 회원id */
+);
+
+COMMENT ON TABLE orders IS '주문';
+
+COMMENT ON COLUMN orders.orderid IS '주문번호';
+
+COMMENT ON COLUMN orders.orderdate IS '주문일자';
+
+COMMENT ON COLUMN orders.userid IS '회원id';
+
+ALTER TABLE orders
+	ADD
+		CONSTRAINT PK_orders
+		PRIMARY KEY (
+			orderid
+		);
+
+/* 장바구니 */
+CREATE TABLE cart (
+	cartid NUMBER NOT NULL, /* 카트번호 */
+	productid NUMBER, /* 상품번호 */
+	userid VARCHAR2(20), /* 회원id */
+	cartea NUMBER /* 카트수량 */
+);
+
+COMMENT ON TABLE cart IS '장바구니';
+
+COMMENT ON COLUMN cart.cartid IS '카트번호';
+
+COMMENT ON COLUMN cart.productid IS '상품번호';
+
+COMMENT ON COLUMN cart.userid IS '회원id';
+
+COMMENT ON COLUMN cart.cartea IS '카트수량';
+
+ALTER TABLE cart
+	ADD
+		CONSTRAINT PK_cart
+		PRIMARY KEY (
+			cartid
+		);
+
+/* 제품 */
+CREATE TABLE product (
+	productid NUMBER NOT NULL, /* 상품번호 */
+	productname VARCHAR2(20) NOT NULL, /* 상품명 */
+	productea NUMBER, /* 재고량 */
+	productprice NUMBER NOT NULL, /* 단가 */
+	productsize NUMBER NOT NULL /* 사이즈 */
+);
+
+COMMENT ON TABLE product IS '제품';
+
+COMMENT ON COLUMN product.productid IS '상품번호';
+
+COMMENT ON COLUMN product.productname IS '상품명';
+
+COMMENT ON COLUMN product.productea IS '재고량';
+
+COMMENT ON COLUMN product.productprice IS '단가';
+
+COMMENT ON COLUMN product.productsize IS '사이즈';
+
+ALTER TABLE product
+	ADD
+		CONSTRAINT PK_product
+		PRIMARY KEY (
+			productid
+		);
+
+/* 주문상세 */
+CREATE TABLE detail (
+	detailid NUMBER NOT NULL, /* 상세주문번호 */
+	allprice NUMBER, /* 총가격 */
+	allquantity NUMBER, /* 총수량 */
+	adress VARCHAR2(20), /* 배송주소 */
+	orderid NUMBER, /* 주문번호 */
+	productid NUMBER /* 상품번호 */
+);
+
+COMMENT ON TABLE detail IS '주문상세';
+
+COMMENT ON COLUMN detail.detailid IS '상세주문번호';
+
+COMMENT ON COLUMN detail.allprice IS '총가격';
+
+COMMENT ON COLUMN detail.allquantity IS '총수량';
+
+COMMENT ON COLUMN detail.adress IS '배송주소';
+
+COMMENT ON COLUMN detail.orderid IS '주문번호';
+
+COMMENT ON COLUMN detail.productid IS '상품번호';
+
+ALTER TABLE detail
+	ADD
+		CONSTRAINT PK_detail
+		PRIMARY KEY (
+			detailid
+		);
+
+ALTER TABLE board
+	ADD
+		CONSTRAINT FK_member_TO_board
+		FOREIGN KEY (
+			userid
+		)
+		REFERENCES member (
+			userid
+		);
+
+ALTER TABLE board
+	ADD
+		FOREIGN KEY (
+		)
+		REFERENCES boardtype (
+			typeid
+		);
+
+ALTER TABLE board
+	ADD
+		FOREIGN KEY (
+		)
+		REFERENCES boardtype (
+			typeid
+		);
+
+ALTER TABLE board
+	ADD
+		CONSTRAINT FK_boardtype_TO_board
+		FOREIGN KEY (
+			typeid
+		)
+		REFERENCES boardtype (
+			typeid
+		);
+
+ALTER TABLE authorities
+	ADD
+		CONSTRAINT FK_member_TO_authorities
+		FOREIGN KEY (
+			userid
+		)
+		REFERENCES member (
+			userid
+		);
+
+ALTER TABLE reply
+	ADD
+		CONSTRAINT FK_board_TO_reply
+		FOREIGN KEY (
+			bid
+		)
+		REFERENCES board (
+			bid
+		);
+
+ALTER TABLE order
+	ADD
+		CONSTRAINT FK_member_TO_order
+		FOREIGN KEY (
+			userid
+		)
+		REFERENCES member (
+			userid
+		);
+
+ALTER TABLE cart
+	ADD
+		CONSTRAINT FK_product_TO_cart
+		FOREIGN KEY (
+			productid
+		)
+		REFERENCES product (
+			productid
+		);
+
+ALTER TABLE cart
+	ADD
+		CONSTRAINT FK_member_TO_cart
+		FOREIGN KEY (
+			userid
+		)
+		REFERENCES member (
+			userid
+		);
+
+ALTER TABLE detail
+	ADD
+		CONSTRAINT FK_order_TO_detail
+		FOREIGN KEY (
+			orderid
+		)
+		REFERENCES order (
+			orderid
+		);
+
+ALTER TABLE detail
+	ADD
+		CONSTRAINT FK_product_TO_detail
+		FOREIGN KEY (
+			productid
+		)
+		REFERENCES product (
+			productid
+		);

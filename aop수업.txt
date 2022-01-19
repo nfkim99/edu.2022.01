@@ -1,0 +1,74 @@
+프로젝트할때 트랜잭션 처리 꼭 하기
+
+
+면접때 설명하기
+
+OOP(객체 지향 언어 프로그래밍) 는
+1. 상속 2. 정보은닉 3. 다양성(폴리몰피즘) 4. 캡슐화
+
+스프링 
+1. di 2. ioc 3. ioc 인젝션
+
+
+AOP(Aspect Oriented Programming)
+관점 지향 프로그래밍
+
+
+마이바티스처럼 함수를 호출하지 않고 공통된 함수는 주입하여 사용
+
+
+pom.xml
+
+<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+있어야함
+
+
+root-context.xml
+
+namespaces 상단에 aop 체크하기!
+
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy> 이거 넣기
+<context:component-scan
+      base-package="edu.kosmo.ex.aop"></context:component-scan>
+넣기
+
+
+aop가 필요할 때
+
+각 서비스함수가 걸리는 시간 재는거 할때
+
+aop를 써서 구현
+
+시작 시간 - 끝시간
+
+aop를 써서 시간재는 코드 넣기
+
+
+
+AOP 단어 정리:
+
+Aspect : 공통 기능이 들어 있는 클래스 (트랜잭션, 로깅, 서비스 등...)
+Advice : 공통 기능의 함수 1. Before 2. After 3. Around
+JoinPoint : AOP가 적용 대상이 되는 함수 = Advice가 적용되는 함수
+Pointcut : JoinPoint의 기점으로 적용되는 before/after 지점위치
+weaving: advice를 적용하는 행위
+
+
+적용대상: AOP 기능은 일반적인 JAVA API를 사용하는 (POJO-Plain Old java Object)들에 적용함.
+controller는 적용은 가능하나 인터셉터나 필터등을 적용함.
+
+
+
