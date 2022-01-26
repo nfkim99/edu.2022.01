@@ -1,0 +1,32 @@
+-- Oracle
+-- 상품 테이블 
+create table product2ex(
+    productid number primary key,
+    productname varchar2(100)   not null,
+    categorycode varchar2(30),
+    productprice number not null,
+    productstock number not null,
+    productdiscount number(2,2),
+    productsize number,
+    productimage varchar2(120),
+    regDate date default sysdate
+);
+
+
+-- 상품id 시퀀스,
+CREATE SEQUENCE product_id_seq
+INCREMENT BY 1 
+START WITH 1 
+MINVALUE 1 
+MAXVALUE 9999
+NOCYCLE
+NOCACHE
+NOORDER;
+
+
+-- insert 테스트
+insert into product2ex(productid, productname, categorycode, productprice, productstock, productsize) values (product_id_seq.nextval,'Nike Airmax,나이키 에어맥스', '나이키,Nike', 69000, 500, 270);
+
+insert into product2ex(productid, productname, categorycode, productprice, productstock, productsize) values (product_id_seq.nextval,'Nike Airmax90,나이키 에어맥스90', '나이키,Nike', 80000, 500, 270);
+insert into product2ex(productid, productname, categorycode, productprice, productstock, productsize) values (product_id_seq.nextval,'Adidas ORIGINALS,아디다스', '아디다스,Adidas', 79000, 500, 270);
+insert into product2ex(productid, productname, categorycode, productprice, productstock, productsize) values (product_id_seq.nextval,'Nike Airmax97 ,나이키 에어맥스97', '나이키,Nike', 135900, 500, 270);
